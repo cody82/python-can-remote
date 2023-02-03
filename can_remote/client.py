@@ -96,6 +96,8 @@ class RemoteClientProtocol(RemoteProtocolBase):
 
     def __init__(self, config, websocket):
         super(RemoteClientProtocol, self).__init__(websocket)
+        if "state" in config:
+            del config["state"]
         self.send_bus_request(config)
         event = self.recv(5)
         if event is None:
